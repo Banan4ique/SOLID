@@ -1,5 +1,6 @@
 package ru.netology.orders.features;
+import ru.netology.orders.Order;
 
 public interface Refusable {
-    void refuse(Integer id);
+    Order refuse(Integer id);
 }

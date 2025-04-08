@@ -9,6 +9,8 @@ public class Order {
     protected HashMap<Product, Integer> content;
     protected Integer cost;
 
+    public Order() {}
+
     public Order(HashMap<Product, Integer> content) {
         orderId = OrdersList.getCounter();
         this.content = content;

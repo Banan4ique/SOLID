@@ -4,6 +4,7 @@ import ru.netology.filters.KeywordFilter;
 import ru.netology.filters.PriceFilter;
 import ru.netology.filters.ProducerFilter;
 import ru.netology.filters.ProductsFilter;
+import ru.netology.orders.CanceledOrder;
 import ru.netology.orders.Order;
 import ru.netology.orders.OrdersList;
 import ru.netology.out.ProductPrinter;
@@ -18,6 +19,7 @@ public class Main {
     private static final List<Product>  products = new ArrayList<>();
     private static final HashMap<Product, Integer> basket = new HashMap<>();
     private static final OrdersList ordersList = new OrdersList();
+    private static final List<CanceledOrder> canceledOrders = new ArrayList<>();
 
     public static void main(String[] args) {
         products.add(new Product("Шоколад \"Алёнка\"", 150, "Красный Октябрь"));
@@ -118,8 +120,11 @@ public class Main {
                         ProductPrinter.printOrders(ordersList);
                         System.out.print("Введите номер заказа для отмены: ");
                         input = scanner.nextLine();
-                        ordersList.refuse(Integer.parseInt(input));
+                        CanceledOrder canceled = new CanceledOrder(ordersList.refuse(Integer.parseInt(input)));
+                        canceledOrders.add(canceled);
                         System.out.println("Заказ отменен");
+                        System.out.println("Отмененные заказы:");
+                        canceledOrders.forEach(System.out::println);
                     } else if (input.equals("2")) {
                         ProductPrinter.printOrders(ordersList);
                         System.out.print("Введите номер заказа для повторения: ");

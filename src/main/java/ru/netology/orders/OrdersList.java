@@ -6,7 +6,6 @@ import ru.netology.orders.features.Repeatable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 public class OrdersList implements Iterable<Order>, Refusable, Repeatable {
 
@@ -49,8 +48,14 @@ public class OrdersList implements Iterable<Order>, Refusable, Repeatable {
     }
 
     @Override
-    public void refuse(Integer id) {
-        list.removeIf(order -> Objects.equals(order.getOrderId(), id));
+    public Order refuse(Integer id) {
+        for (Order order : list) {
+            if (order.getOrderId().equals(id)) {
+                list.remove(order);
+                return order;
+            }
+        }
+        return null;
     }
 
     @Override
